@@ -1,4 +1,4 @@
-input = """23|96
+23|96
 53|45
 53|92
 73|27
@@ -1173,9 +1173,9 @@ input = """23|96
 18|68
 29|77
 29|38
-78|63"""
+78|63
 
-input2="""88,63,38,62,17,37,97,26,46,53,14,92,65,45,55,11,57,31,68,61,59,12,76
+88,63,38,62,17,37,97,26,46,53,14,92,65,45,55,11,57,31,68,61,59,12,76
 46,53,14,92,65,55,11,57,31,59,12,54,82,84,41,39,29,13,83
 13,83,94,73,48,74,96,77,38,62,17
 31,76,54,41,29,48,51
@@ -1383,60 +1383,4 @@ input2="""88,63,38,62,17,37,97,26,46,53,14,92,65,45,55,11,57,31,68,61,59,12,76
 42,18,94,27,13,29,56,96,24
 31,26,45,12,61,11,29,65,55,53,54,57,14,41,68,97,59,71,82,84,92,76,39
 45,82,12,76,84,53,18
-73,56,42,27,18,97,53"""
-
-
-
-lines = input.splitlines()
-
-
-rules = input.split("\n")
-page_numbers = input2.split("\n")
-value_map = {}
-
-for rule in rules:
-    key, value = rule.split("|")
-
-    if key not in value_map:
-        value_map[key] = []
-
-    value_map[key].append(value)
-
-# print("Map:")
-# for key, values in value_map.items():
-#     print(f"{key}: {values}")
-
-
-
-is_valid = True
-total=0
-valid_pages = []
-for page in page_numbers:
-    values = page.split(",")
-
-    is_valid = True
-    for i in range(len(values)):
-
-        current = values[i]
-
-        previous_values = values[:i]
-
-        if current in value_map:
-
-            if any(prev in value_map[current] for prev in previous_values):
-                is_valid = False
-                break
-
-    if is_valid:
-        valid_pages.append(page)
-
-print(valid_pages)
-for page in valid_pages:
-    values = page.split(",")
-    index = len(values)//2
-    total+= int(values[index])
-
-
-print(total)
-
-
+73,56,42,27,18,97,53
